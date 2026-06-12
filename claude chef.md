@@ -50,3 +50,5 @@ Never make the same mistake twice.
 - Always research before giving a recipe — search real sources (YouTube chefs, food blogs, culinary sites) and base the recipe on what's actually tested and proven, not just memory. Mention key sources briefly.
 - Web recipe pages: minimal/functional design, NOT decorative. System font, no fancy fonts, clean, at-a-glance for cooking.
 - Ingredient amounts must be editable inputs; editing one rescales ALL ingredients AND the quantities embedded in the steps. Include quick scale buttons (½× 1× 2× 3×).
+- Keep steps to ONE line each — action + critical cue only. No clock timestamps, durations only. Push long tips/notes into a collapsible "+ Notes" section.
+- For tray/pan-based bakes: include an editable tray-size (W×H) control that rescales the whole recipe by area, and update tray dimensions referenced in the steps.
