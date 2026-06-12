@@ -48,3 +48,5 @@ Never make the same mistake twice.
 - Use designed formatting: ingredient tables, bold step headers, emoji section markers, blockquotes for substitutions and tips
 - Always include exact quantities (with units) inside the steps themselves, not just in the ingredient list
 - Always research before giving a recipe — search real sources (YouTube chefs, food blogs, culinary sites) and base the recipe on what's actually tested and proven, not just memory. Mention key sources briefly.
+- Web recipe pages: minimal/functional design, NOT decorative. System font, no fancy fonts, clean, at-a-glance for cooking.
+- Ingredient amounts must be editable inputs; editing one rescales ALL ingredients AND the quantities embedded in the steps. Include quick scale buttons (½× 1× 2× 3×).

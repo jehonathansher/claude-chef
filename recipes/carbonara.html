@@ -1,430 +1,165 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8"/>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Carbonara — Claude Chef</title>
-  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;1,9..144,300;1,9..144,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet"/>
-  <style>
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Carbonara</title>
+<style>
+  :root {
+    --line: #e5e5e5;
+    --mid: #777;
+    --bg: #fff;
+    --fg: #111;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+    color: var(--fg);
+    background: var(--bg);
+    line-height: 1.5;
+    -webkit-font-smoothing: antialiased;
+  }
+  .wrap { max-width: 760px; margin: 0 auto; padding: 48px 24px 80px; }
 
-    :root {
-      --black: #111;
-      --white: #fefefe;
-      --grey: #f4f3f0;
-      --mid: #999;
-      --accent: #d4a853;
-      --border: #e8e6e1;
-    }
+  a.back { font-size: 13px; color: var(--mid); text-decoration: none; }
+  a.back:hover { color: var(--fg); }
 
-    body {
-      background: var(--white);
-      color: var(--black);
-      font-family: 'DM Sans', sans-serif;
-      font-weight: 300;
-    }
+  h1 { font-size: 28px; font-weight: 600; margin: 24px 0 4px; letter-spacing: -0.02em; }
+  .meta { font-size: 13px; color: var(--mid); margin-bottom: 4px; }
+  .sources { font-size: 12px; color: var(--mid); margin-bottom: 32px; }
+  .sources a { color: var(--mid); }
 
-    /* NAV */
-    nav {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 28px 48px;
-      border-bottom: 1px solid var(--border);
-    }
-    .wordmark {
-      font-family: 'Fraunces', serif;
-      font-size: 1.1rem;
-      font-weight: 400;
-    }
-    .wordmark em { font-style: italic; color: var(--accent); }
-    .back {
-      font-size: 0.78rem;
-      color: var(--mid);
-      text-decoration: none;
-      letter-spacing: 0.04em;
-      transition: color 0.15s;
-    }
-    .back:hover { color: var(--black); }
+  h2 {
+    font-size: 12px; font-weight: 600; text-transform: uppercase;
+    letter-spacing: 0.08em; color: var(--mid);
+    margin: 36px 0 12px;
+  }
 
-    /* HERO */
-    .hero {
-      padding: 80px 48px 64px;
-      display: grid;
-      grid-template-columns: 1fr auto;
-      align-items: end;
-      gap: 40px;
-      border-bottom: 1px solid var(--border);
-    }
-    .hero-tag {
-      font-size: 0.68rem;
-      letter-spacing: 0.14em;
-      text-transform: uppercase;
-      color: var(--accent);
-      margin-bottom: 20px;
-      font-weight: 500;
-    }
-    .hero h1 {
-      font-family: 'Fraunces', serif;
-      font-size: clamp(3.5rem, 8vw, 6.5rem);
-      font-weight: 300;
-      line-height: 0.95;
-      letter-spacing: -0.03em;
-    }
-    .hero h1 em { font-style: italic; }
-    .hero-meta {
-      display: flex;
-      flex-direction: column;
-      gap: 20px;
-      text-align: right;
-    }
-    .meta-item span:first-child {
-      display: block;
-      font-size: 0.65rem;
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-      color: var(--mid);
-      margin-bottom: 4px;
-    }
-    .meta-item span:last-child {
-      font-size: 0.92rem;
-      font-weight: 500;
-    }
+  /* Ingredients */
+  .ing { display: flex; align-items: baseline; gap: 10px; padding: 7px 0; border-bottom: 1px solid var(--line); }
+  .ing input {
+    width: 64px; text-align: right; font: inherit; font-size: 15px;
+    border: 1px solid var(--line); border-radius: 5px; padding: 3px 6px;
+    background: #fafafa; color: var(--fg);
+  }
+  .ing input:focus { outline: none; border-color: var(--fg); background: #fff; }
+  .ing .unit { font-size: 14px; color: var(--mid); width: 24px; }
+  .ing .name { font-size: 15px; }
 
-    /* SOURCES */
-    .sources-bar {
-      padding: 16px 48px;
-      background: var(--grey);
-      font-size: 0.75rem;
-      color: var(--mid);
-      display: flex;
-      gap: 8px;
-      align-items: center;
-      flex-wrap: wrap;
-      border-bottom: 1px solid var(--border);
-    }
-    .sources-bar strong {
-      font-size: 0.65rem;
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
-      color: #777;
-      font-weight: 500;
-      margin-right: 4px;
-    }
-    .sources-bar a { color: var(--accent); text-decoration: none; }
-    .sources-bar a:hover { text-decoration: underline; }
-    .sources-bar .dot { color: var(--border); }
+  .scaler { font-size: 12px; color: var(--mid); margin-top: 10px; }
+  .scaler button {
+    font: inherit; font-size: 12px; border: 1px solid var(--line);
+    background: #fff; border-radius: 5px; padding: 3px 9px; margin-right: 4px; cursor: pointer; color: var(--fg);
+  }
+  .scaler button:hover { border-color: var(--fg); }
 
-    /* BODY */
-    .recipe-body {
-      display: grid;
-      grid-template-columns: 320px 1fr;
-      min-height: calc(100vh - 200px);
-    }
+  /* Steps */
+  ol { list-style: none; counter-reset: s; }
+  li {
+    counter-increment: s; position: relative;
+    padding: 0 0 16px 30px; font-size: 15px;
+  }
+  li::before {
+    content: counter(s);
+    position: absolute; left: 0; top: 0;
+    font-size: 12px; color: var(--mid); font-variant-numeric: tabular-nums;
+    width: 18px; text-align: right;
+  }
+  li b { font-weight: 600; }
+  .q { font-weight: 600; font-variant-numeric: tabular-nums; }
+  .cue { color: var(--mid); }
 
-    /* INGREDIENTS PANEL */
-    .ingredients-panel {
-      border-right: 1px solid var(--border);
-      padding: 56px 40px;
-    }
-    .ingredients-sticky { position: sticky; top: 32px; }
-
-    .panel-label {
-      font-size: 0.65rem;
-      font-weight: 500;
-      letter-spacing: 0.14em;
-      text-transform: uppercase;
-      color: var(--mid);
-      margin-bottom: 28px;
-    }
-
-    .ingredient {
-      display: flex;
-      justify-content: space-between;
-      align-items: baseline;
-      padding: 14px 0;
-      border-bottom: 1px solid var(--border);
-      gap: 12px;
-    }
-    .ingredient:first-of-type { border-top: 1px solid var(--border); }
-    .ing-name { font-size: 0.88rem; }
-    .ing-qty {
-      font-size: 0.88rem;
-      font-weight: 500;
-      white-space: nowrap;
-      font-variant-numeric: tabular-nums;
-    }
-
-    .sub-block {
-      margin-top: 28px;
-      padding: 20px;
-      background: var(--grey);
-      border-radius: 2px;
-    }
-    .sub-block .sub-label {
-      font-size: 0.62rem;
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-      color: var(--mid);
-      font-weight: 500;
-      margin-bottom: 10px;
-    }
-    .sub-block p {
-      font-size: 0.8rem;
-      line-height: 1.7;
-      color: #555;
-    }
-    .sub-block p strong { color: var(--black); font-weight: 500; }
-
-    /* STEPS PANEL */
-    .steps-panel {
-      padding: 56px 56px 80px;
-    }
-
-    .step {
-      display: grid;
-      grid-template-columns: 48px 1fr;
-      gap: 24px;
-      margin-bottom: 48px;
-      align-items: start;
-    }
-    .step-num {
-      width: 36px;
-      height: 36px;
-      border: 1px solid var(--border);
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 0.75rem;
-      font-weight: 500;
-      color: var(--mid);
-      flex-shrink: 0;
-      margin-top: 4px;
-    }
-    .step-content {}
-    .step-title {
-      font-family: 'Fraunces', serif;
-      font-size: 1.1rem;
-      font-weight: 400;
-      letter-spacing: -0.01em;
-      margin-bottom: 8px;
-    }
-    .step-desc {
-      font-size: 0.87rem;
-      line-height: 1.8;
-      color: #444;
-    }
-    .step-desc .qty { font-weight: 500; color: var(--black); }
-    .step-desc .cue { color: var(--mid); font-style: italic; }
-
-    /* PRO TIP */
-    .pro-tip {
-      margin-top: 16px;
-      margin-left: 72px;
-      padding: 24px 28px;
-      background: var(--black);
-      color: var(--white);
-      border-radius: 2px;
-    }
-    .pro-tip .tip-label {
-      font-size: 0.62rem;
-      letter-spacing: 0.14em;
-      text-transform: uppercase;
-      color: var(--accent);
-      font-weight: 500;
-      margin-bottom: 8px;
-    }
-    .pro-tip p {
-      font-size: 0.87rem;
-      line-height: 1.7;
-      opacity: 0.8;
-    }
-
-    /* FOOTER */
-    footer {
-      border-top: 1px solid var(--border);
-      padding: 28px 48px;
-      display: flex;
-      justify-content: space-between;
-      font-size: 0.72rem;
-      color: var(--mid);
-    }
-
-    @media (max-width: 720px) {
-      .recipe-body { grid-template-columns: 1fr; }
-      .ingredients-panel { border-right: none; border-bottom: 1px solid var(--border); padding: 40px 24px; }
-      .steps-panel { padding: 40px 24px 60px; }
-      .hero { grid-template-columns: 1fr; padding: 56px 24px 40px; }
-      .hero-meta { text-align: left; flex-direction: row; flex-wrap: wrap; gap: 24px; }
-      nav, .sources-bar, footer { padding-left: 24px; padding-right: 24px; }
-      .pro-tip { margin-left: 0; }
-    }
-  </style>
+  .sub { font-size: 13px; color: var(--mid); margin-top: 12px; line-height: 1.7; }
+  .tip { font-size: 14px; margin-top: 28px; padding: 14px 16px; background: #f6f6f6; border-radius: 6px; }
+  .tip b { font-size: 12px; text-transform: uppercase; letter-spacing: 0.06em; color: var(--mid); display: block; margin-bottom: 4px; }
+</style>
 </head>
 <body>
+<div class="wrap">
 
-  <nav>
-    <div class="wordmark">Claude <em>Chef</em></div>
-    <a href="../index.html" class="back">← All recipes</a>
-  </nav>
+  <a class="back" href="../index.html">← Recipes</a>
 
-  <div class="hero">
-    <div>
-      <div class="hero-tag">Pasta · Roman · Classic</div>
-      <h1>Carbo<em>nara</em></h1>
-    </div>
-    <div class="hero-meta">
-      <div class="meta-item">
-        <span>Time</span>
-        <span>~25 min</span>
-      </div>
-      <div class="meta-item">
-        <span>Serves</span>
-        <span>2</span>
-      </div>
-      <div class="meta-item">
-        <span>Level</span>
-        <span>Easy</span>
-      </div>
-    </div>
-  </div>
-
-  <div class="sources-bar">
-    <strong>Sources</strong>
-    <a href="https://italiasquisita.net/en/posts/the-pasta-carbonara-of-paolo-parisi">Italia Squisita</a>
-    <span class="dot">·</span>
-    <a href="https://www.inromecooking.com/blog/recipes/carbonara-recipe-rome/">InRome Cooking</a>
-    <span class="dot">·</span>
+  <h1>Carbonara</h1>
+  <div class="meta">Roman · serves <span class="q" data-base="2" data-round="serv">2</span> · ~25 min</div>
+  <div class="sources">Sources:
+    <a href="https://italiasquisita.net/en/posts/the-pasta-carbonara-of-paolo-parisi">Italia Squisita</a>,
+    <a href="https://www.inromecooking.com/blog/recipes/carbonara-recipe-rome/">InRome Cooking</a>,
     <a href="https://www.lacucinaitaliana.com/recipe/pasta/classic-carbonara">La Cucina Italiana</a>
   </div>
 
-  <div class="recipe-body">
+  <h2>Ingredients</h2>
+  <div class="ing"><input data-base="200" data-round="g" value="200"><span class="unit">g</span><span class="name">Spaghetti</span></div>
+  <div class="ing"><input data-base="150" data-round="g" value="150"><span class="unit">g</span><span class="name">Guanciale</span></div>
+  <div class="ing"><input data-base="3" data-round="egg" value="3"><span class="unit"></span><span class="name">Egg yolks</span></div>
+  <div class="ing"><input data-base="1" data-round="egg" value="1"><span class="unit"></span><span class="name">Whole egg</span></div>
+  <div class="ing"><input data-base="60" data-round="g" value="60"><span class="unit">g</span><span class="name">Pecorino Romano, grated</span></div>
+  <div class="ing"><input data-base="0" disabled value="" style="visibility:hidden"><span class="unit"></span><span class="name">Black pepper · Salt for water</span></div>
 
-    <!-- INGREDIENTS -->
-    <div class="ingredients-panel">
-      <div class="ingredients-sticky">
-        <div class="panel-label">Ingredients</div>
-
-        <div class="ingredient">
-          <span class="ing-name">Spaghetti</span>
-          <span class="ing-qty">200g</span>
-        </div>
-        <div class="ingredient">
-          <span class="ing-name">Guanciale</span>
-          <span class="ing-qty">150g</span>
-        </div>
-        <div class="ingredient">
-          <span class="ing-name">Egg yolks</span>
-          <span class="ing-qty">3</span>
-        </div>
-        <div class="ingredient">
-          <span class="ing-name">Whole egg</span>
-          <span class="ing-qty">1</span>
-        </div>
-        <div class="ingredient">
-          <span class="ing-name">Pecorino Romano, grated</span>
-          <span class="ing-qty">60g</span>
-        </div>
-        <div class="ingredient">
-          <span class="ing-name">Black pepper, cracked</span>
-          <span class="ing-qty">generous</span>
-        </div>
-        <div class="ingredient">
-          <span class="ing-name">Salt</span>
-          <span class="ing-qty">for water</span>
-        </div>
-
-        <div class="sub-block">
-          <div class="sub-label">Substitutions</div>
-          <p>
-            <strong>No guanciale?</strong> Pancetta or thick-cut bacon.<br/><br/>
-            <strong>No Pecorino?</strong> 30g Pecorino + 30g Parmigiano.<br/><br/>
-            <strong>No cream — ever.</strong>
-          </p>
-        </div>
-      </div>
-    </div>
-
-    <!-- STEPS -->
-    <div class="steps-panel">
-
-      <div class="step">
-        <div class="step-num">1</div>
-        <div class="step-content">
-          <div class="step-title">Render the guanciale</div>
-          <div class="step-desc">Cut <span class="qty">150g guanciale</span> into thick lardons. Cold pan, medium heat. Cook until <span class="cue">fat turns glass-clear and edges are crispy</span>. Turn off heat — leave everything in the pan.</div>
-        </div>
-      </div>
-
-      <div class="step">
-        <div class="step-num">2</div>
-        <div class="step-content">
-          <div class="step-title">Make the sauce</div>
-          <div class="step-desc">Whisk <span class="qty">3 yolks + 1 whole egg + 60g Pecorino</span> with a generous amount of cracked black pepper into a smooth paste. <span class="cue">Monosilio's ratio: 1 yolk per person + 1 whole egg for the batch.</span></div>
-        </div>
-      </div>
-
-      <div class="step">
-        <div class="step-num">3</div>
-        <div class="step-content">
-          <div class="step-title">Cook the pasta</div>
-          <div class="step-desc">Boil <span class="qty">200g spaghetti</span> in well-salted water. Pull it out <span class="qty">2 min early</span> — it finishes in the pan.</div>
-        </div>
-      </div>
-
-      <div class="step">
-        <div class="step-num">4</div>
-        <div class="step-content">
-          <div class="step-title">Save the pasta water</div>
-          <div class="step-desc">Before draining, scoop out a full mug (<span class="qty">~200g</span>) of pasta water. This is your emulsifier — don't skip it.</div>
-        </div>
-      </div>
-
-      <div class="step">
-        <div class="step-num">5</div>
-        <div class="step-content">
-          <div class="step-title">Combine pasta + guanciale</div>
-          <div class="step-desc">Toss drained pasta into the guanciale pan (heat off). Add <span class="qty">~30g pasta water</span>, toss until <span class="cue">glossy and absorbed</span>.</div>
-        </div>
-      </div>
-
-      <div class="step">
-        <div class="step-num">6</div>
-        <div class="step-content">
-          <div class="step-title">Let it cool slightly</div>
-          <div class="step-desc">Wait 30 seconds. The pan must be warm — not hot. <span class="cue">Too hot = scrambled eggs.</span></div>
-        </div>
-      </div>
-
-      <div class="step">
-        <div class="step-num">7</div>
-        <div class="step-content">
-          <div class="step-title">Add the egg mixture</div>
-          <div class="step-desc">Pour the egg paste over the pasta off the heat. Toss constantly. Add pasta water <span class="qty">~20g at a time</span> until the sauce <span class="cue">coats every strand — creamy, not dry, not runny</span>.</div>
-        </div>
-      </div>
-
-      <div class="step">
-        <div class="step-num">8</div>
-        <div class="step-content">
-          <div class="step-title">Plate immediately</div>
-          <div class="step-desc">Serve right away. Crack more black pepper on top. Nothing else needed.</div>
-        </div>
-      </div>
-
-      <div class="pro-tip">
-        <div class="tip-label">Pro tip</div>
-        <p>The #1 Roman rule — eggs go in off the heat, always. The pasta's warmth does the cooking, not the pan. Pasta water is what makes it silky: add slowly, keep tossing.</p>
-      </div>
-
-    </div>
+  <div class="scaler">Scale:
+    <button data-x="0.5">½×</button>
+    <button data-x="1">1×</button>
+    <button data-x="2">2×</button>
+    <button data-x="3">3×</button>
+    <span id="serv-note"></span>
   </div>
 
-  <footer>
-    <span>Claude Chef</span>
-    <span>Researched &amp; written by Claude</span>
-  </footer>
+  <h2>Steps</h2>
+  <ol>
+    <li><b>Render guanciale.</b> Cut <span class="q" data-base="150" data-round="g">150</span>g guanciale into lardons. Cold pan, medium heat. Cook <span class="cue">until fat is glass-clear, edges crisp</span>. Heat off, leave in pan.</li>
+    <li><b>Sauce.</b> Whisk <span class="q" data-base="3" data-round="egg">3</span> yolks + <span class="q" data-base="1" data-round="egg">1</span> whole egg + <span class="q" data-base="60" data-round="g">60</span>g Pecorino + lots of black pepper to a paste.</li>
+    <li><b>Pasta.</b> Boil <span class="q" data-base="200" data-round="g">200</span>g spaghetti in salted water. Pull <b>2 min early</b>.</li>
+    <li><b>Save water.</b> Scoop a mug (~<span class="q" data-base="200" data-round="g">200</span>g) of pasta water before draining.</li>
+    <li><b>Combine.</b> Pasta into pan (heat off). Add ~<span class="q" data-base="30" data-round="g">30</span>g pasta water, toss <span class="cue">until glossy</span>.</li>
+    <li><b>Cool 30s.</b> Pan warm, not hot. <span class="cue">Too hot = scrambled eggs.</span></li>
+    <li><b>Add egg.</b> Pour egg paste off heat, toss constantly. Add water ~<span class="q" data-base="20" data-round="g">20</span>g at a time <span class="cue">until it coats every strand — creamy, not runny</span>.</li>
+    <li><b>Plate.</b> Serve now, crack more pepper. Done.</li>
+  </ol>
 
+  <div class="sub">No guanciale → pancetta/bacon. No Pecorino → half Parmigiano. No cream, ever.</div>
+
+  <div class="tip"><b>Pro tip</b>Eggs always go in off the heat — the pasta's warmth cooks them, not the pan. Pasta water makes it silky: add slow, keep tossing.</div>
+
+</div>
+
+<script>
+  const BASE = 200;                       // reference: spaghetti grams = scale anchor
+  const inputs = [...document.querySelectorAll('.ing input[data-base]')];
+  const qs     = [...document.querySelectorAll('.q[data-base]')];
+
+  function fmt(val, round){
+    if(round === 'egg'){ return Math.max(1, Math.round(val)); }
+    if(round === 'serv'){ return Math.max(1, Math.round(val)); }
+    // grams: round to nearest 5 above 40, else nearest 1
+    if(val >= 40) return Math.round(val/5)*5;
+    return Math.round(val);
+  }
+
+  function apply(scale){
+    inputs.forEach(el=>{
+      const b = parseFloat(el.dataset.base);
+      if(!b) return;
+      el.value = fmt(b*scale, el.dataset.round);
+    });
+    qs.forEach(el=>{
+      const b = parseFloat(el.dataset.base);
+      el.textContent = fmt(b*scale, el.dataset.round);
+    });
+  }
+
+  // edit any ingredient → derive scale from that field
+  inputs.forEach(el=>{
+    el.addEventListener('input', ()=>{
+      const b = parseFloat(el.dataset.base);
+      const v = parseFloat(el.value);
+      if(!b || !v) return;
+      apply(v/b);
+    });
+  });
+
+  // scale buttons
+  document.querySelectorAll('.scaler button').forEach(btn=>{
+    btn.addEventListener('click', ()=> apply(parseFloat(btn.dataset.x)));
+  });
+</script>
 </body>
 </html>
