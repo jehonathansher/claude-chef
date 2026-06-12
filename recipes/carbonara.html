@@ -1,241 +1,430 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
+  <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Carbonara — Claude Chef</title>
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet"/>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;1,9..144,300;1,9..144,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet"/>
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
+    :root {
+      --black: #111;
+      --white: #fefefe;
+      --grey: #f4f3f0;
+      --mid: #999;
+      --accent: #d4a853;
+      --border: #e8e6e1;
+    }
+
     body {
-      background: #faf9f6;
-      color: #1a1a1a;
-      font-family: 'Inter', sans-serif;
+      background: var(--white);
+      color: var(--black);
+      font-family: 'DM Sans', sans-serif;
       font-weight: 300;
-      min-height: 100vh;
     }
 
-    /* ── Header ── */
-    header {
-      background: #1a1a1a;
-      color: #faf9f6;
-      padding: 14px 40px;
+    /* NAV */
+    nav {
       display: flex;
+      justify-content: space-between;
       align-items: center;
-      gap: 12px;
+      padding: 28px 48px;
+      border-bottom: 1px solid var(--border);
     }
-    header span.logo {
-      font-family: 'Playfair Display', serif;
+    .wordmark {
+      font-family: 'Fraunces', serif;
       font-size: 1.1rem;
-      letter-spacing: 0.04em;
-      opacity: 0.85;
-    }
-    header span.sep { opacity: 0.3; }
-    header span.title {
-      font-size: 0.85rem;
       font-weight: 400;
-      opacity: 0.6;
-      letter-spacing: 0.06em;
-      text-transform: uppercase;
     }
+    .wordmark em { font-style: italic; color: var(--accent); }
+    .back {
+      font-size: 0.78rem;
+      color: var(--mid);
+      text-decoration: none;
+      letter-spacing: 0.04em;
+      transition: color 0.15s;
+    }
+    .back:hover { color: var(--black); }
 
-    /* ── Hero ── */
+    /* HERO */
     .hero {
-      background: #1a1a1a;
-      color: #faf9f6;
-      padding: 80px 40px 60px;
-      max-width: 100%;
+      padding: 80px 48px 64px;
+      display: grid;
+      grid-template-columns: 1fr auto;
+      align-items: end;
+      gap: 40px;
+      border-bottom: 1px solid var(--border);
     }
-    .hero .tag {
-      font-size: 0.72rem;
-      font-weight: 600;
+    .hero-tag {
+      font-size: 0.68rem;
       letter-spacing: 0.14em;
       text-transform: uppercase;
-      color: #c9a96e;
-      margin-bottom: 18px;
+      color: var(--accent);
+      margin-bottom: 20px;
+      font-weight: 500;
     }
     .hero h1 {
-      font-family: 'Playfair Display', serif;
-      font-size: clamp(3rem, 8vw, 6rem);
-      line-height: 1;
-      font-weight: 700;
-      margin-bottom: 20px;
+      font-family: 'Fraunces', serif;
+      font-size: clamp(3.5rem, 8vw, 6.5rem);
+      font-weight: 300;
+      line-height: 0.95;
+      letter-spacing: -0.03em;
     }
-    .hero h1 em {
-      font-style: italic;
-      color: #c9a96e;
-    }
-    .hero .meta {
+    .hero h1 em { font-style: italic; }
+    .hero-meta {
       display: flex;
-      gap: 32px;
-      font-size: 0.82rem;
-      font-weight: 400;
-      letter-spacing: 0.04em;
-      opacity: 0.55;
-      margin-top: 24px;
-    }
-    .hero .meta span strong {
-      display: block;
-      font-weight: 600;
-      font-size: 1rem;
-      opacity: 1;
-      color: #faf9f6;
-      margin-bottom: 2px;
-    }
-
-    /* ── Sources ── */
-    .sources {
-      background: #f0ece4;
-      padding: 18px 40px;
-      font-size: 0.78rem;
-      color: #666;
-      display: flex;
-      align-items: center;
+      flex-direction: column;
       gap: 20px;
-      flex-wrap: wrap;
+      text-align: right;
     }
-    .sources span { font-weight: 600; color: #333; text-transform: uppercase; letter-spacing: 0.08em; font-size: 0.7rem; }
-    .sources a { color: #c9a96e; text-decoration: none; font-weight: 500; }
-    .sources a:hover { text-decoration: underline; }
-
-    /* ── Layout ── */
-    .content {
-      max-width: 900px;
-      margin: 0 auto;
-      padding: 60px 40px;
-      display: grid;
-      grid-template-columns: 280px 1fr;
-      gap: 60px;
-    }
-
-    @media (max-width: 680px) {
-      .content { grid-template-columns: 1fr; padding: 40px 24px; }
-      .hero { padding: 60px 24px 40px; }
-    }
-
-    /* ── Section labels ── */
-    .section-label {
-      font-size: 0.68rem;
-      font-weight: 700;
-      letter-spacing: 0.16em;
+    .meta-item span:first-child {
+      display: block;
+      font-size: 0.65rem;
+      letter-spacing: 0.12em;
       text-transform: uppercase;
-      color: #c9a96e;
-      margin-bottom: 20px;
+      color: var(--mid);
+      margin-bottom: 4px;
+    }
+    .meta-item span:last-child {
+      font-size: 0.92rem;
+      font-weight: 500;
     }
 
-    /* ── Ingredients ── */
-    .ingredients { }
-    .ingredients-sticky { position: sticky; top: 30px; }
+    /* SOURCES */
+    .sources-bar {
+      padding: 16px 48px;
+      background: var(--grey);
+      font-size: 0.75rem;
+      color: var(--mid);
+      display: flex;
+      gap: 8px;
+      align-items: center;
+      flex-wrap: wrap;
+      border-bottom: 1px solid var(--border);
+    }
+    .sources-bar strong {
+      font-size: 0.65rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: #777;
+      font-weight: 500;
+      margin-right: 4px;
+    }
+    .sources-bar a { color: var(--accent); text-decoration: none; }
+    .sources-bar a:hover { text-decoration: underline; }
+    .sources-bar .dot { color: var(--border); }
 
-    .ingredient-item {
+    /* BODY */
+    .recipe-body {
+      display: grid;
+      grid-template-columns: 320px 1fr;
+      min-height: calc(100vh - 200px);
+    }
+
+    /* INGREDIENTS PANEL */
+    .ingredients-panel {
+      border-right: 1px solid var(--border);
+      padding: 56px 40px;
+    }
+    .ingredients-sticky { position: sticky; top: 32px; }
+
+    .panel-label {
+      font-size: 0.65rem;
+      font-weight: 500;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--mid);
+      margin-bottom: 28px;
+    }
+
+    .ingredient {
       display: flex;
       justify-content: space-between;
       align-items: baseline;
-      padding: 12px 0;
-      border-bottom: 1px solid #e8e4db;
-      gap: 16px;
+      padding: 14px 0;
+      border-bottom: 1px solid var(--border);
+      gap: 12px;
     }
-    .ingredient-item:first-of-type { border-top: 1px solid #e8e4db; }
-    .ingredient-name { font-size: 0.9rem; font-weight: 400; }
-    .ingredient-qty { font-size: 0.9rem; font-weight: 600; white-space: nowrap; color: #1a1a1a; }
+    .ingredient:first-of-type { border-top: 1px solid var(--border); }
+    .ing-name { font-size: 0.88rem; }
+    .ing-qty {
+      font-size: 0.88rem;
+      font-weight: 500;
+      white-space: nowrap;
+      font-variant-numeric: tabular-nums;
+    }
 
-    .substitution {
-      margin-top: 20px;
-      background: #f0ece4;
-      border-left: 3px solid #c9a96e;
-      padding: 14px 16px;
+    .sub-block {
+      margin-top: 28px;
+      padding: 20px;
+      background: var(--grey);
+      border-radius: 2px;
+    }
+    .sub-block .sub-label {
+      font-size: 0.62rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--mid);
+      font-weight: 500;
+      margin-bottom: 10px;
+    }
+    .sub-block p {
       font-size: 0.8rem;
-      line-height: 1.6;
+      line-height: 1.7;
       color: #555;
     }
-    .substitution strong { color: #1a1a1a; display: block; margin-bottom: 4px; font-size: 0.72rem; letter-spacing: 0.08em; text-transform: uppercase; }
+    .sub-block p strong { color: var(--black); font-weight: 500; }
 
-    /* ── Steps ── */
-    .steps { }
+    /* STEPS PANEL */
+    .steps-panel {
+      padding: 56px 56px 80px;
+    }
 
     .step {
       display: grid;
-      grid-template-columns: 36px 1fr;
-      gap: 20px;
-      margin-bottom: 36px;
+      grid-template-columns: 48px 1fr;
+      gap: 24px;
+      margin-bottom: 48px;
       align-items: start;
     }
-    .step-number {
+    .step-num {
       width: 36px;
       height: 36px;
-      background: #1a1a1a;
-      color: #faf9f6;
+      border: 1px solid var(--border);
       border-radius: 50%;
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 0.78rem;
-      font-weight: 600;
+      font-size: 0.75rem;
+      font-weight: 500;
+      color: var(--mid);
       flex-shrink: 0;
-      margin-top: 2px;
+      margin-top: 4px;
     }
-    .step-body {}
+    .step-content {}
     .step-title {
-      font-family: 'Playfair Display', serif;
-      font-size: 1.05rem;
-      font-weight: 700;
-      margin-bottom: 6px;
-    }
-    .step-desc {
-      font-size: 0.88rem;
-      line-height: 1.75;
-      color: #444;
-    }
-    .step-desc .qty {
-      font-weight: 600;
-      color: #1a1a1a;
-    }
-    .step-desc .visual {
-      font-style: italic;
-      color: #888;
-    }
-
-    /* ── Pro tip ── */
-    .pro-tip {
-      margin-top: 10px;
-      background: #1a1a1a;
-      color: #faf9f6;
-      padding: 24px 28px;
-      border-radius: 4px;
-      font-size: 0.88rem;
-      line-height: 1.7;
-      grid-column: 1 / -1;
-    }
-    .pro-tip strong {
-      font-size: 0.68rem;
-      letter-spacing: 0.14em;
-      text-transform: uppercase;
-      color: #c9a96e;
-      display: block;
+      font-family: 'Fraunces', serif;
+      font-size: 1.1rem;
+      font-weight: 400;
+      letter-spacing: -0.01em;
       margin-bottom: 8px;
     }
+    .step-desc {
+      font-size: 0.87rem;
+      line-height: 1.8;
+      color: #444;
+    }
+    .step-desc .qty { font-weight: 500; color: var(--black); }
+    .step-desc .cue { color: var(--mid); font-style: italic; }
 
-    /* ── Footer ── */
+    /* PRO TIP */
+    .pro-tip {
+      margin-top: 16px;
+      margin-left: 72px;
+      padding: 24px 28px;
+      background: var(--black);
+      color: var(--white);
+      border-radius: 2px;
+    }
+    .pro-tip .tip-label {
+      font-size: 0.62rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--accent);
+      font-weight: 500;
+      margin-bottom: 8px;
+    }
+    .pro-tip p {
+      font-size: 0.87rem;
+      line-height: 1.7;
+      opacity: 0.8;
+    }
+
+    /* FOOTER */
     footer {
-      text-align: center;
-      padding: 40px;
-      font-size: 0.75rem;
-      color: #bbb;
-      letter-spacing: 0.06em;
+      border-top: 1px solid var(--border);
+      padding: 28px 48px;
+      display: flex;
+      justify-content: space-between;
+      font-size: 0.72rem;
+      color: var(--mid);
+    }
+
+    @media (max-width: 720px) {
+      .recipe-body { grid-template-columns: 1fr; }
+      .ingredients-panel { border-right: none; border-bottom: 1px solid var(--border); padding: 40px 24px; }
+      .steps-panel { padding: 40px 24px 60px; }
+      .hero { grid-template-columns: 1fr; padding: 56px 24px 40px; }
+      .hero-meta { text-align: left; flex-direction: row; flex-wrap: wrap; gap: 24px; }
+      nav, .sources-bar, footer { padding-left: 24px; padding-right: 24px; }
+      .pro-tip { margin-left: 0; }
     }
   </style>
 </head>
 <body>
 
-  <header>
-    <span class="logo">Claude Chef</span>
-    <span class="sep">—</span>
-    <span class="title">Recipe Card</span>
-  </header>
+  <nav>
+    <div class="wordmark">Claude <em>Chef</em></div>
+    <a href="../index.html" class="back">← All recipes</a>
+  </nav>
 
-  <!-- RECIPE CONTENT GOES HERE -->
+  <div class="hero">
+    <div>
+      <div class="hero-tag">Pasta · Roman · Classic</div>
+      <h1>Carbo<em>nara</em></h1>
+    </div>
+    <div class="hero-meta">
+      <div class="meta-item">
+        <span>Time</span>
+        <span>~25 min</span>
+      </div>
+      <div class="meta-item">
+        <span>Serves</span>
+        <span>2</span>
+      </div>
+      <div class="meta-item">
+        <span>Level</span>
+        <span>Easy</span>
+      </div>
+    </div>
+  </div>
 
-  <footer>Claude Chef · Recipe researched &amp; written by AI, tested by you.</footer>
+  <div class="sources-bar">
+    <strong>Sources</strong>
+    <a href="https://italiasquisita.net/en/posts/the-pasta-carbonara-of-paolo-parisi">Italia Squisita</a>
+    <span class="dot">·</span>
+    <a href="https://www.inromecooking.com/blog/recipes/carbonara-recipe-rome/">InRome Cooking</a>
+    <span class="dot">·</span>
+    <a href="https://www.lacucinaitaliana.com/recipe/pasta/classic-carbonara">La Cucina Italiana</a>
+  </div>
+
+  <div class="recipe-body">
+
+    <!-- INGREDIENTS -->
+    <div class="ingredients-panel">
+      <div class="ingredients-sticky">
+        <div class="panel-label">Ingredients</div>
+
+        <div class="ingredient">
+          <span class="ing-name">Spaghetti</span>
+          <span class="ing-qty">200g</span>
+        </div>
+        <div class="ingredient">
+          <span class="ing-name">Guanciale</span>
+          <span class="ing-qty">150g</span>
+        </div>
+        <div class="ingredient">
+          <span class="ing-name">Egg yolks</span>
+          <span class="ing-qty">3</span>
+        </div>
+        <div class="ingredient">
+          <span class="ing-name">Whole egg</span>
+          <span class="ing-qty">1</span>
+        </div>
+        <div class="ingredient">
+          <span class="ing-name">Pecorino Romano, grated</span>
+          <span class="ing-qty">60g</span>
+        </div>
+        <div class="ingredient">
+          <span class="ing-name">Black pepper, cracked</span>
+          <span class="ing-qty">generous</span>
+        </div>
+        <div class="ingredient">
+          <span class="ing-name">Salt</span>
+          <span class="ing-qty">for water</span>
+        </div>
+
+        <div class="sub-block">
+          <div class="sub-label">Substitutions</div>
+          <p>
+            <strong>No guanciale?</strong> Pancetta or thick-cut bacon.<br/><br/>
+            <strong>No Pecorino?</strong> 30g Pecorino + 30g Parmigiano.<br/><br/>
+            <strong>No cream — ever.</strong>
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <!-- STEPS -->
+    <div class="steps-panel">
+
+      <div class="step">
+        <div class="step-num">1</div>
+        <div class="step-content">
+          <div class="step-title">Render the guanciale</div>
+          <div class="step-desc">Cut <span class="qty">150g guanciale</span> into thick lardons. Cold pan, medium heat. Cook until <span class="cue">fat turns glass-clear and edges are crispy</span>. Turn off heat — leave everything in the pan.</div>
+        </div>
+      </div>
+
+      <div class="step">
+        <div class="step-num">2</div>
+        <div class="step-content">
+          <div class="step-title">Make the sauce</div>
+          <div class="step-desc">Whisk <span class="qty">3 yolks + 1 whole egg + 60g Pecorino</span> with a generous amount of cracked black pepper into a smooth paste. <span class="cue">Monosilio's ratio: 1 yolk per person + 1 whole egg for the batch.</span></div>
+        </div>
+      </div>
+
+      <div class="step">
+        <div class="step-num">3</div>
+        <div class="step-content">
+          <div class="step-title">Cook the pasta</div>
+          <div class="step-desc">Boil <span class="qty">200g spaghetti</span> in well-salted water. Pull it out <span class="qty">2 min early</span> — it finishes in the pan.</div>
+        </div>
+      </div>
+
+      <div class="step">
+        <div class="step-num">4</div>
+        <div class="step-content">
+          <div class="step-title">Save the pasta water</div>
+          <div class="step-desc">Before draining, scoop out a full mug (<span class="qty">~200g</span>) of pasta water. This is your emulsifier — don't skip it.</div>
+        </div>
+      </div>
+
+      <div class="step">
+        <div class="step-num">5</div>
+        <div class="step-content">
+          <div class="step-title">Combine pasta + guanciale</div>
+          <div class="step-desc">Toss drained pasta into the guanciale pan (heat off). Add <span class="qty">~30g pasta water</span>, toss until <span class="cue">glossy and absorbed</span>.</div>
+        </div>
+      </div>
+
+      <div class="step">
+        <div class="step-num">6</div>
+        <div class="step-content">
+          <div class="step-title">Let it cool slightly</div>
+          <div class="step-desc">Wait 30 seconds. The pan must be warm — not hot. <span class="cue">Too hot = scrambled eggs.</span></div>
+        </div>
+      </div>
+
+      <div class="step">
+        <div class="step-num">7</div>
+        <div class="step-content">
+          <div class="step-title">Add the egg mixture</div>
+          <div class="step-desc">Pour the egg paste over the pasta off the heat. Toss constantly. Add pasta water <span class="qty">~20g at a time</span> until the sauce <span class="cue">coats every strand — creamy, not dry, not runny</span>.</div>
+        </div>
+      </div>
+
+      <div class="step">
+        <div class="step-num">8</div>
+        <div class="step-content">
+          <div class="step-title">Plate immediately</div>
+          <div class="step-desc">Serve right away. Crack more black pepper on top. Nothing else needed.</div>
+        </div>
+      </div>
+
+      <div class="pro-tip">
+        <div class="tip-label">Pro tip</div>
+        <p>The #1 Roman rule — eggs go in off the heat, always. The pasta's warmth does the cooking, not the pan. Pasta water is what makes it silky: add slowly, keep tossing.</p>
+      </div>
+
+    </div>
+  </div>
+
+  <footer>
+    <span>Claude Chef</span>
+    <span>Researched &amp; written by Claude</span>
+  </footer>
+
 </body>
 </html>
