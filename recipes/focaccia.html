@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Focaccia 90%</title>
+<style>
+  :root { --line:#e5e5e5; --mid:#777; }
+  * { box-sizing:border-box; margin:0; padding:0; }
+  body {
+    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Helvetica,Arial,sans-serif;
+    color:#111; background:#fff; line-height:1.5; -webkit-font-smoothing:antialiased;
+  }
+  .wrap { max-width:760px; margin:0 auto; padding:48px 24px 80px; }
+  a.back { font-size:13px; color:var(--mid); text-decoration:none; }
+  a.back:hover { color:#111; }
+  h1 { font-size:28px; font-weight:600; margin:24px 0 4px; letter-spacing:-0.02em; }
+  .meta { font-size:13px; color:var(--mid); margin-bottom:4px; }
+  .intro { font-size:14px; color:#444; margin:12px 0 0; }
+  h2 { font-size:12px; font-weight:600; text-transform:uppercase; letter-spacing:0.08em; color:var(--mid); margin:36px 0 12px; }
+
+  .ing { display:flex; align-items:baseline; gap:10px; padding:7px 0; border-bottom:1px solid var(--line); }
+  .ing input {
+    width:70px; text-align:right; font:inherit; font-size:15px;
+    border:1px solid var(--line); border-radius:5px; padding:3px 6px; background:#fafafa; color:#111;
+  }
+  .ing input:focus { outline:none; border-color:#111; background:#fff; }
+  .ing .unit { font-size:14px; color:var(--mid); width:34px; }
+  .ing .name { font-size:15px; }
+
+  .scaler { font-size:12px; color:var(--mid); margin-top:10px; }
+  .scaler button {
+    font:inherit; font-size:12px; border:1px solid var(--line); background:#fff;
+    border-radius:5px; padding:3px 9px; margin-right:4px; cursor:pointer; color:#111;
+  }
+  .scaler button:hover { border-color:#111; }
+
+  ol { list-style:none; counter-reset:s; }
+  li { counter-increment:s; position:relative; padding:0 0 18px 34px; font-size:15px; }
+  li::before {
+    content:counter(s); position:absolute; left:0; top:0; font-size:12px; color:var(--mid);
+    font-variant-numeric:tabular-nums; width:20px; text-align:right;
+  }
+  li b { font-weight:600; }
+  .q { font-weight:600; font-variant-numeric:tabular-nums; }
+  .cue { color:var(--mid); }
+  .time { color:#999; font-size:13px; }
+
+  .notes { font-size:13px; color:#444; line-height:1.8; }
+  .notes p { margin-bottom:8px; }
+  .sub { font-size:13px; color:var(--mid); margin-top:12px; line-height:1.7; }
+  .tip { font-size:14px; margin-top:28px; padding:14px 16px; background:#f6f6f6; border-radius:6px; }
+  .tip b { font-size:12px; text-transform:uppercase; letter-spacing:0.06em; color:var(--mid); display:block; margin-bottom:4px; }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <a class="back" href="../index.html">← Recipes</a>
+
+  <h1>Focaccia — 90% Hydration</h1>
+  <div class="meta">One 30×40 cm tray · ~3–4 cm thick · same-day · ready 13:30</div>
+  <p class="intro">Airy, thick focaccia with an open crumb and crisp crust. Tuned for Shtibel artisan flour (11.4% protein) in a climate-controlled Emek Hefer kitchen. Mixer knead, same-day ferment, timed from 07:30 to serving at 13:30.</p>
+
+  <h2>Ingredients</h2>
+  <div class="ing"><input data-base="1000" data-round="g" value="1000"><span class="unit">g</span><span class="name">Shtibel artisan flour (11.4% protein)</span></div>
+  <div class="ing"><input data-base="900" data-round="g" value="900"><span class="unit">ml</span><span class="name">Warm water (start with 820, hold 80 back)</span></div>
+  <div class="ing"><input data-base="12" data-round="g" value="12"><span class="unit">g</span><span class="name">Instant dry yeast</span></div>
+  <div class="ing"><input data-base="20" data-round="g" value="20"><span class="unit">g</span><span class="name">Salt</span></div>
+  <div class="ing"><input data-base="140" data-round="g" value="140"><span class="unit">ml</span><span class="name">Olive oil (dough + tray + finish)</span></div>
+  <div class="ing"><input data-base="6" data-round="g" value="6"><span class="unit">g</span><span class="name">Coarse salt, to scatter</span></div>
+  <div class="ing"><input data-base="6" data-round="egg" value="6"><span class="unit"></span><span class="name">Fresh rosemary sprigs (optional)</span></div>
+
+  <div class="scaler">Scale:
+    <button data-x="0.5">½×</button>
+    <button data-x="1">1×</button>
+    <button data-x="1.5">1.5×</button>
+    <button data-x="2">2×</button>
+  </div>
+
+  <h2>Steps</h2>
+  <ol>
+    <li><b>Mix &amp; autolyse.</b> <span class="time">~07:30 ·</span> In a mixer with dough hook, combine <span class="q" data-base="1000" data-round="g">1000</span>g flour, <span class="q" data-base="820" data-round="g">820</span>ml of the warm water, and <span class="q" data-base="12" data-round="g">12</span>g yeast on low ~2 min, <span class="cue">just until no dry flour remains</span>. Cover, rest 25 min. <span class="cue">With low-protein flour this is critical — the rest builds gluten on its own.</span></li>
+
+    <li><b>Knead.</b> Add <span class="q" data-base="20" data-round="g">20</span>g salt and <span class="q" data-base="30" data-round="g">30</span>ml of the olive oil. Knead at medium 8–9 min until the dough wraps the hook and turns glossy. <span class="cue">Don't overwork — weak gluten can break.</span> If it holds well, add the reserved <span class="q" data-base="80" data-round="g">80</span>ml water gradually. It stays sticky and loose — that's correct.</li>
+
+    <li><b>Bulk + folds.</b> <span class="time">~07:55–10:20 ·</span> Move to a lightly oiled bowl, in a calm spot away from the AC airflow. Do 4 sets of stretch-and-folds, 30 min apart. <span class="cue">At 23–24°C the whole ferment takes ~2–2.5 h — wait for 50–70% rise and big bubbles. Go by look.</span></li>
+
+    <li><b>Into the tray.</b> <span class="time">~10:20 ·</span> Generously oil a 30×40 cm tray with the remaining olive oil. Tip in all the dough, fold over itself once or twice, gently stretch toward the corners <span class="cue">without knocking out air</span>. If it shrinks back, rest 10 min and try again.</li>
+
+    <li><b>Proof in tray.</b> <span class="time">~10:30–12:15 ·</span> Cover and proof (away from the AC) until puffed, bubbly, and slow to spring back — about 1.5–2 h. <span class="cue">When a gentle press leaves a dent that fills slowly, it's ready.</span></li>
+
+    <li><b>Heat oven.</b> <span class="time">~12:05 ·</span> Heat to 230°C static (or 215°C fan) for at least 30 min. <span class="cue">A baking stone/steel on the bottom helps even heat.</span></li>
+
+    <li><b>Dimple &amp; top.</b> <span class="time">~12:35 ·</span> Oil your fingertips and press deep to the tray bottom for the classic dimples, but gently. Scatter <span class="q" data-base="6" data-round="g">6</span>g coarse salt, add <span class="q" data-base="6" data-round="egg">6</span> rosemary sprigs if using, and drizzle more olive oil to fill the dimples.</li>
+
+    <li><b>Bake.</b> <span class="time">~12:40 ·</span> 25–30 min to a deep golden-amber. <span class="cue">Thick dough needs a touch longer — make sure the center is baked through, not damp. Pale sides? Give it 2–3 min more.</span></li>
+
+    <li><b>Cool.</b> Out of the tray immediately onto a rack so the bottom doesn't steam. Cool at least 20 min before slicing — <span class="cue">cutting hot wrecks the texture</span>. Ready to serve at 13:30.</li>
+  </ol>
+
+  <div class="sub">No rosemary → leave plain or use thyme. Kitchen cooler than 22°C → use 14g yeast.</div>
+
+  <h2>Notes</h2>
+  <div class="notes">
+    <p><b>1. Flour.</b> At 11.4% protein the gluten is weaker, so 90% hydration is its upper edge. Start at 820ml; add the reserve only if the dough can take it. If it breaks down and stays liquid, stop at 87–88% — workable dough beats wet dough.</p>
+    <p><b>2. Autolyse + folds are your friends</b> — they build structure without aggressive kneading that could snap weak gluten.</p>
+    <p><b>3. AC.</b> Keep the kitchen ~23–24°C, but never put the bowl or tray under the vent — direct airflow dries the surface and hurts the proof.</p>
+    <p><b>4. Open crumb.</b> Don't knock out air when transferring to the tray, and don't over-dimple before baking.</p>
+    <p><b>5. Thickness.</b> In a 30×40 tray, 1kg flour gives ~3–4 cm thick focaccia. Want thinner → split into two small trays. Extra thick → use a 25×33 tray (add 4–6 min bake, check the center well).</p>
+  </div>
+
+  <div class="tip"><b>Pro tip</b>Go by look, not the clock. The schedule assumes 23–24°C — if your kitchen runs warmer or cooler, the dough moves faster or slower. Trust the 50–70% rise and the slow-filling dimple.</div>
+
+</div>
+
+<script>
+  const inputs = [...document.querySelectorAll('.ing input[data-base]')];
+  const qs     = [...document.querySelectorAll('.q[data-base]')];
+  function fmt(v,r){
+    if(r==='egg') return Math.max(1,Math.round(v));
+    if(v>=40) return Math.round(v/5)*5;
+    return Math.round(v);
+  }
+  function apply(scale){
+    inputs.forEach(el=>{ const b=parseFloat(el.dataset.base); if(!b)return; el.value=fmt(b*scale,el.dataset.round); });
+    qs.forEach(el=>{ const b=parseFloat(el.dataset.base); el.textContent=fmt(b*scale,el.dataset.round); });
+  }
+  inputs.forEach(el=>el.addEventListener('input',()=>{
+    const b=parseFloat(el.dataset.base), v=parseFloat(el.value);
+    if(!b||!v)return; apply(v/b);
+  }));
+  document.querySelectorAll('.scaler button').forEach(b=>b.addEventListener('click',()=>apply(parseFloat(b.dataset.x))));
+</script>
+</body>
+</html>
